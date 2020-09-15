@@ -1,0 +1,5 @@
+homepage: "https://www.biano.cz"
+documentation: "https://pixel.biano.cz/pdf/GUIDE-GTM.pdf"
+versions:
+  - sha: 74e847e9903d68033326e9ab6577974139c5eda7
+    changeNotes: Initial Version
