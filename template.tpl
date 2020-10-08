@@ -159,6 +159,8 @@ const domainMap = {
   sk: 'biano.sk',
   ro: 'biano.ro',
   nl: 'biano.nl',
+  hu: 'biano.hu',
+  pt: 'biano.pt',
   br: 'biano.com.br',
 };
 
