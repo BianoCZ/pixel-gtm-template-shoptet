@@ -206,6 +206,13 @@ const bianoTrack = getBianoTrack();
 bianoTrack('init', data.merchantId);
 
 const handlers = {
+  page_view: () => {
+    const values = {
+      source: 'gtm-shoptet',
+    };
+
+    return values;
+  },
   product_view: () => {
     const product = copyFromDataLayer('shoptet.product');
     if (!product || !product.codes || !product.codes[0]) {
@@ -214,6 +221,7 @@ const handlers = {
 
     const values = {
       id: makeString(product.codes[0].code),
+      source: 'gtm-shoptet',
     };
 
     if (data.debug) {
@@ -233,6 +241,7 @@ const handlers = {
       quantity: makeInteger(ecommerce.add[0].quantity),
       unit_price: makeNumber(ecommerce.add[0].price),
       currency: makeString(ecommerce.currencyCode),
+      source: 'gtm-shoptet',
     };
 
     if (data.debug) {
@@ -261,6 +270,7 @@ const handlers = {
       order_price: makeNumber(order.total),
       currency: makeString(order.currencyCode),
       items: orderItems,
+      source: 'gtm-shoptet',
     };
 
     if (data.debug) {
@@ -271,16 +281,13 @@ const handlers = {
   },
 };
 
-if (data.eventType === 'page_view') {
-  bianoTrack('track', data.eventType);
-} else {
-  const handler = handlers[data.eventType];
-  if (!handler) {
-    return;
-  }
 
-  bianoTrack('track', data.eventType, handler());
+const handler = handlers[data.eventType];
+if (!handler) {
+  return;
 }
+
+bianoTrack('track', data.eventType, handler());
 
 const scriptPath = data.debug ? 'debug' : 'min';
 const scriptUrl = 'https://pixel.' + domain + '/' + scriptPath + '/pixel.js';
