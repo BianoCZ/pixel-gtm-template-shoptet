@@ -1,6 +1,8 @@
 homepage: "https://www.biano.cz"
 documentation: "https://pixel.biano.cz/pdf/GUIDE-GTM.pdf"
 versions:
+  - sha: 960349d7bfda54f46720973853aaf691e1d1ab16
+    changeNotes: Add Biano Star support
   - sha: dc6a19c70d5d19e18cbe8db66a9c3e1dcf41f9bb
     changeNotes: Add source to all events
   - sha: dade50c387fefb1d17b81ed40148090b787eb699
