@@ -131,6 +131,20 @@ ___TEMPLATE_PARAMETERS___
         "type": "EQUALS"
       }
     ]
+  },
+  {
+    "type": "TEXT",
+    "name": "customer_email",
+    "displayName": "Customer e-mail (Biano Star)",
+    "simpleValueType": true,
+    "enablingConditions": [
+      {
+        "paramName": "eventType",
+        "paramValue": "purchase",
+        "type": "EQUALS"
+      }
+    ],
+    "help": "Fill in customer email to enable Biano Star"
   }
 ]
 
@@ -265,13 +279,17 @@ const handlers = {
       };
     });
 
-    const values = {
+    let values = {
       id: makeString(order.orderNo),
       order_price: makeNumber(order.total),
       currency: makeString(order.currencyCode),
       items: orderItems,
       source: 'gtm-shoptet',
     };
+
+    if (data.customer_email) {
+      values.customer_email = data.customer_email;
+    }
 
     if (data.debug) {
       log('Biano Pixel for Shoptet: purchase', values);
