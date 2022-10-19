@@ -145,6 +145,27 @@ ___TEMPLATE_PARAMETERS___
       }
     ],
     "help": "Fill in customer email to enable Biano Star"
+  },
+  {
+    "type": "TEXT",
+    "name": "shipping_days",
+    "displayName": "Expected shipping in days (Biano Star)",
+    "simpleValueType": true,
+    "enablingConditions": [
+      {
+        "paramName": "eventType",
+        "paramValue": "purchase",
+        "type": "EQUALS"
+      }
+    ],
+    "help": "Fill in expected order shipping in days.",
+    "valueUnit": "days",
+    "valueValidators": [
+      {
+        "type": "NON_NEGATIVE_NUMBER"
+      }
+    ],
+    "defaultValue": 0
   }
 ]
 
@@ -161,6 +182,7 @@ const log = require('logToConsole');
 const makeInteger = require('makeInteger');
 const makeNumber = require('makeNumber');
 const makeString = require('makeString');
+const getTimestampMillis = require('getTimestampMillis');
 
 if (data.debug) {
   log('data', data);
@@ -289,6 +311,11 @@ const handlers = {
 
     if (data.customer_email) {
       values.customer_email = data.customer_email;
+    }
+    
+    if (data.shipping_days) {
+      const shippingDate = (getTimestampMillis() / 1000) + (makeInteger(data.shipping_days) * 24 * 60 * 60);
+      values.shipping_date = shippingDate;
     }
 
     if (data.debug) {
