@@ -160,12 +160,8 @@ ___TEMPLATE_PARAMETERS___
     ],
     "help": "Fill in expected order shipping in days.",
     "valueUnit": "days",
-    "valueValidators": [
-      {
-        "type": "NON_NEGATIVE_NUMBER"
-      }
-    ],
-    "defaultValue": 0
+    "valueValidators": [],
+    "defaultValue": ""
   }
 ]
 
@@ -183,6 +179,7 @@ const makeInteger = require('makeInteger');
 const makeNumber = require('makeNumber');
 const makeString = require('makeString');
 const getTimestampMillis = require('getTimestampMillis');
+const getType = require('getType');
 
 if (data.debug) {
   log('data', data);
@@ -313,8 +310,20 @@ const handlers = {
       values.customer_email = data.customer_email;
     }
     
-    if (data.shipping_days) {
-      const shippingDate = (getTimestampMillis() / 1000) + (makeInteger(data.shipping_days) * 24 * 60 * 60);
+    if (data.shipping_days && (getType(data.shipping_days) === 'string' || getType(data.shipping_days) === 'number')) {
+      const shipping_days_int = makeInteger(data.shipping_days);
+      if (data.shipping_days == shipping_days_int) {
+        const shippingDate = makeInteger(getTimestampMillis() / 1000) + (shipping_days_int * 24 * 60 * 60);
+        if (data.debug) {
+          log('Biano Pixel for Shoptet: shippingDate as UNIX timestamp', shippingDate);
+        }
+        values.shipping_date = shippingDate;
+      }
+    } else if (getType(order.estimatedDeliveryTime) === 'string') {
+      const shippingDate = order.estimatedDeliveryTime.substring(0, 10);
+      if (data.debug) {
+        log('Biano Pixel for Shoptet: shippingDate as DATE string from order.estimatedDeliveryTime', shippingDate);
+      }
       values.shipping_date = shippingDate;
     }
 
