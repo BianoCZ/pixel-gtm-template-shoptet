@@ -1,6 +1,8 @@
 homepage: "https://www.biano.cz"
 documentation: "https://pixel.biano.cz/pdf/GUIDE-GTM.pdf"
 versions:
+  - sha: c21ca0bafdb76c7bc4c4d42e6f7a53c5d701139c
+    changeNotes: Fix shipping date and use estimatedDeliveryTime
   - sha: 802840771d93782d962a64ddcf85b0ba9db0b98f
     changeNotes: Biano Star add expected order shipping in days
   - sha: 960349d7bfda54f46720973853aaf691e1d1ab16
