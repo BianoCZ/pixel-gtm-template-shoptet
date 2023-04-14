@@ -1,6 +1,8 @@
 homepage: "https://www.biano.cz"
 documentation: "https://pixel.biano.cz/pdf/GUIDE-GTM.pdf"
 versions:
+  - sha: 8433c9443de5899f5a35f108ba4f441d61de98c4
+    changeNotes: Support Greece and Italy
   - sha: c21ca0bafdb76c7bc4c4d42e6f7a53c5d701139c
     changeNotes: Fix shipping date and use estimatedDeliveryTime
   - sha: 802840771d93782d962a64ddcf85b0ba9db0b98f
