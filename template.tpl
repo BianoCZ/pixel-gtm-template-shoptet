@@ -590,6 +590,14 @@ ___WEB_PERMISSIONS___
               },
               {
                 "type": 1,
+                "string": "https://pixel.biano.gr/*/pixel.js"
+              },
+              {
+                "type": 1,
+                "string": "https://pixel.biano.it/*/pixel.js"
+              },
+              {
+                "type": 1,
                 "string": "https://pixel.biano.com.br/*/pixel.js"
               }
             ]
