@@ -133,35 +133,62 @@ ___TEMPLATE_PARAMETERS___
     ]
   },
   {
-    "type": "TEXT",
-    "name": "customer_email",
-    "displayName": "Customer e-mail (Biano Star)",
-    "simpleValueType": true,
+    "type": "GROUP",
+    "name": "bianoStar",
+    "displayName": "Biano Star",
+    "groupStyle": "NO_ZIPPY",
+    "subParams": [
+      {
+        "type": "TEXT",
+        "name": "customer_email",
+        "displayName": "Customer e-mail",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "eventType",
+            "paramValue": "purchase",
+            "type": "EQUALS"
+          }
+        ],
+        "help": "Fill in customer email to enable Biano Star"
+      },
+      {
+        "type": "TEXT",
+        "name": "shipping_date",
+        "displayName": "Expected shipping date",
+        "simpleValueType": true,
+        "help": "Enter variable with date in format YYYY-MM-DD (ie: 2002-09-14).",
+        "enablingConditions": [
+          {
+            "paramName": "shipping_days",
+            "paramValue": "",
+            "type": "NOT_PRESENT"
+          }
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "shipping_days",
+        "displayName": "Expected shipping in days",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "shipping_date",
+            "paramValue": "",
+            "type": "NOT_PRESENT"
+          }
+        ],
+        "help": "Alternatively you can fill in expected order shipping in days.",
+        "valueUnit": "days"
+      }
+    ],
     "enablingConditions": [
       {
         "paramName": "eventType",
         "paramValue": "purchase",
         "type": "EQUALS"
       }
-    ],
-    "help": "Fill in customer email to enable Biano Star"
-  },
-  {
-    "type": "TEXT",
-    "name": "shipping_days",
-    "displayName": "Expected shipping in days (Biano Star)",
-    "simpleValueType": true,
-    "enablingConditions": [
-      {
-        "paramName": "eventType",
-        "paramValue": "purchase",
-        "type": "EQUALS"
-      }
-    ],
-    "help": "Fill in expected order shipping in days.",
-    "valueUnit": "days",
-    "valueValidators": [],
-    "defaultValue": ""
+    ]
   }
 ]
 
@@ -321,6 +348,12 @@ const handlers = {
         }
         values.shipping_date = shippingDate;
       }
+    } else if (data.shipping_date && getType(data.shipping_date) === 'string') {
+      const shippingDate = data.shipping_date.substring(0, 10);
+      if (data.debug) {
+        log('Biano Pixel for Shoptet: shippingDate as DATE', shippingDate);
+      }
+      values.shipping_date = shippingDate;
     } else if (getType(order.estimatedDeliveryTime) === 'string') {
       const shippingDate = order.estimatedDeliveryTime.substring(0, 10);
       if (data.debug) {
