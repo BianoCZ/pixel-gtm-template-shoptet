@@ -1,6 +1,8 @@
 homepage: "https://www.biano.cz"
 documentation: "https://pixel.biano.cz/pdf/GUIDE-GTM.pdf"
 versions:
+  - sha: d89164fa64169ff1a0c5e4e9e777fdb260a6c9d1
+    changeNotes: Support Bulgaria
   - sha: 23749782f926218db1080395095c72b43b367ef5
     changeNotes: Extend shipping date options for Biano Star
   - sha: b862f736ca5086f07a1701e6d11108e844500a89
