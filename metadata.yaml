@@ -1,6 +1,8 @@
 homepage: "https://www.biano.cz"
 documentation: "https://pixel.biano.cz/pdf/GUIDE-GTM.pdf"
 versions:
+  - sha: e0f6638b3f141d69356ae2859356d378eab5910f
+    changeNotes: Support native GTM consent
   - sha: d89164fa64169ff1a0c5e4e9e777fdb260a6c9d1
     changeNotes: Support Bulgaria
   - sha: 23749782f926218db1080395095c72b43b367ef5
